@@ -1,0 +1,58 @@
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:table="sap.ui.table"
+	controllerName="sequeirablog.com.br.view.Master">
+	<Page id="productListPage" title="{i18n>masterTitle}" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Table id="catalogTable" class="navTableControlLayout" items="{/ListSet}" growing="true" growingScrollToLoad="true">
+				<!--<headerToolbar id="catalogTable_headerToolbar">-->
+				<!--	<Toolbar id="tableToolbar">-->
+				<!--		<Label id="catalogTitle" text="{viewProperties>/catalogTitleText}" class="sapMH4FontSize" visible="{viewProperties>/catalogTitleVisible}"/>-->
+				<!--		<ToolbarSpacer id="toolbarSpacer"/>-->
+				<!--		<SearchField id="searchField" showRefreshButton="false" placeholder="{i18n>masterSearchPlaceholder}" tooltip="{i18n>masterSearchTooltip}"-->
+				<!--			search="onSearchPressed" width="{viewProperties>/searchFieldWidth}"/>-->
+				<!--	</Toolbar>-->
+				<!--</headerToolbar>-->
+				<columns id="catalogTable_columns">
+					<Column id="catalogTable_col1" width="{viewProperties>/availabilityColumnWidth}" hAlign="Left">
+						<header id="catalogTable_col1_header">
+							<Label id="catalogTable_col1_label" text="{i18n>title}"/>
+						</header>
+					</Column>
+					<Column id="catalogTable_col2" width="10%" hAlign="Left">
+						<header id="catalogTable_col2_header">
+							<Label id="catalogTable_col2_label" text="{i18n>date}"/>
+						</header>
+					</Column>
+					<Column id="catalogTable_col3" width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+						<header id="catalogTable_col3_header">
+							<Label id="catalogTable_col3_label" text="{i18n>time}"/>
+						</header>
+					</Column>
+					<Column id="catalogTable_col4" width="10%" hAlign="Right">
+						<header id="catalogTable_col4_header">
+							<Label id="catalogTable_col4_label" text="{i18n>creator}"/>
+						</header>
+					</Column>
+				</columns>
+				<ColumnListItem id="columnListItem" vAlign="Middle" type="Navigation" press="onLineItemPressed" class="navTableItemLayout">
+					<cells id="columnListItem_cells">
+						<Text id="columnListItem_cell_1" text="{ObjDescr}" maxLines="2"/>
+						<Text id="columnListItem_cell_2" text="{path: 'CreatDate', formatter: '.formatDate'}" maxLines="2"/>
+						<Text id="columnListItem_cell_3" text="{path: 'CreatTime', formatter: '.formatTime'}" maxLines="2"/>
+						<Text id="columnListItem_cell_4" text="{CreatName}" maxLines="2"/>
+					</cells>
+				</ColumnListItem>
+			</Table>
+		</content>
+		<footer>
+			<Toolbar class="sapContrast sapContrastPlus" width="100%" id="__toolbar1">
+				<content>
+					<!--You could change the time here...-->					
+					<Label width="5%" id="__label19" text="01:00"/>
+					<ProgressIndicator id="__indicator0" percentValue="100" state="Success"/>
+					<ToolbarSpacer id="__spacer0"/>
+					<Button width="100px" id="__button0" icon="sap-icon://refresh" press="onrefresh"/>
+				</content>
+			</Toolbar>
+		</footer>
+	</Page>
+</core:View>

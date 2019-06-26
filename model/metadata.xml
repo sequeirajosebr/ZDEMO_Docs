@@ -1,0 +1,54 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZDEMO_DOCS_SRV" xml:lang="pt" sap:schema-version="1">
+            <EntityType Name="List" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DocId"/>
+                </Key>
+                <Property Name="DocId" Type="Edm.String" Nullable="false" MaxLength="46" sap:label="ID de uma entrada da pasta (obj+pasta+nome do transmissor)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ObjDescr" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Título" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatDate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="SAPoffice: data de criação do objeto ou do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatTime" Type="Edm.Time" Nullable="false" Precision="0" sap:label="SAPoffice: hora de criação do objeto ou do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatName" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Criado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="np_ListtoTexts" Relationship="ZDEMO_DOCS_SRV.List_to_Texts" FromRole="FromRole_List_to_Texts" ToRole="ToRole_List_to_Texts"/>
+            </EntityType>
+            <EntityType Name="Texts" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DocId"/>
+                    <PropertyRef Name="Line"/>
+                </Key>
+                <Property Name="DocId" Type="Edm.String" Nullable="false" MaxLength="46" sap:label="ID de uma entrada da pasta (obj+pasta+nome do transmissor)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Line" Type="Edm.Int32" Nullable="false" sap:label="Nº" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Campo txto compr.255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="List_to_Texts" sap:content-version="1">
+                <End Type="ZDEMO_DOCS_SRV.List" Multiplicity="1" Role="FromRole_List_to_Texts"/>
+                <End Type="ZDEMO_DOCS_SRV.Texts" Multiplicity="*" Role="ToRole_List_to_Texts"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_List_to_Texts">
+                        <PropertyRef Name="DocId"/>
+                    </Principal>
+                    <Dependent Role="ToRole_List_to_Texts">
+                        <PropertyRef Name="DocId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZDEMO_DOCS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="TextsSet" EntityType="ZDEMO_DOCS_SRV.Texts" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ListSet" EntityType="ZDEMO_DOCS_SRV.List" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="List_to_TextsSet" Association="ZDEMO_DOCS_SRV.List_to_Texts" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ListSet" Role="FromRole_List_to_Texts"/>
+                    <End EntitySet="TextsSet" Role="ToRole_List_to_Texts"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZDEMO_DOCS_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZDEMO_DOCS_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
